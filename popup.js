@@ -1,6 +1,18 @@
 const STORAGE_KEY = 'clashRuleSettings';
 
+const SPECIAL_SUFFIXES = ['dpdns.org', 'us.kg', 'qzz.io'];
+const SPECIAL_REGEXP = new RegExp(
+  `([^.]+\\.(?:${SPECIAL_SUFFIXES.map(s => s.replace(/\./g, '\\.')).join('|')}))$`,
+  'i'
+);
+
 function getRootDomain(hostname) {
+  // 1. 预执行正则：拦截特殊后缀
+  // match[1] 会直接返回类似 "xxx.us.kg" 的结果
+  const match = hostname.match(SPECIAL_REGEXP);
+  if (match) return match[1];
+
+  // 2. 只有非特殊后缀，才进入沉重的标准解析
   try {
     // tldts 会自动识别 IP 地址、多级后缀（.com.cn）以及特殊后缀（.github.io）
     // 如果解析失败，它会返回 null，此时我们回退到原始 hostname
