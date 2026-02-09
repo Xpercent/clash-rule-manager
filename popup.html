@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Clash 规则管理器</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <h1>Clash 规则管理器</h1>
+    <div class="section">
+      <div class="label">识别到的根域名：</div>
+      <div id="current-domain" class="value" style="font-weight: bold; color: #2563eb;">加载中...</div>
+    </div>
+    <div class="section">
+      <div class="label">当前状态：</div>
+      <div id="status-text" class="value">检测中...</div>
+    </div>
+    <div class="section">
+      <div class="label">规则操作：</div>
+      <div id="rule-buttons" class="buttons-container"></div>
+      <div id="no-groups-hint" class="hint" style="display:none;">尚未配置规则分组，请前往设置。</div>
+    </div>
+    <div id="sync-status" class="hint" style="text-align: center; margin-top: 8px; color: #10b981; min-height: 15px;"></div>
+    <div class="footer">
+      <button id="open-options-button" class="secondary-button">设置</button>
+    </div>
+  </div>
+  <!-- 1. 引入 tldts 库 -->
+  <script src="index.umd.min.js"></script>
+  <!-- 2. 再引入业务逻辑 -->
+  <script src="popup.js"></script>
+</body>
+</html>
